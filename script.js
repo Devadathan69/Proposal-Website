@@ -8,33 +8,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const noBtn = document.getElementById('no-btn');
     const question = document.querySelector('.question');
 
-    // Function to trigger the cut animation (to avoid repetition)
+    // Function to trigger the cut animation
     function triggerCutAnimation() {
+        // Move the scissor to the right
         scissor.style.left = '530px';
+
+        // Cut the ribbons
         ribbonLeft.classList.add('cut-left');
         ribbonRight.classList.add('cut-right');
 
+        // Flip and fade out the cover
         setTimeout(() => {
             cover.style.transform = 'rotateX(180deg)';
             cover.style.opacity = '0';
         }, 1000);
 
+        // Show the letter content
         setTimeout(() => {
             letterContent.classList.add('content-visible');
-            question.style.display = 'block'; // Ensure question is shown after animation
+            question.style.display = 'block';
         }, 1500);
     }
 
-    // Scissor Cutting Animation (Optional)
-    scissor.addEventListener('click', triggerCutAnimation);
+    // Add event listeners to both ribbons
+    ribbonLeft.addEventListener('click', triggerCutAnimation);
+    ribbonRight.addEventListener('click', triggerCutAnimation);
+    ribbonLeft.addEventListener('touchstart', triggerCutAnimation);
+    ribbonRight.addEventListener('touchstart', triggerCutAnimation);
 
-    // Ribbon Click Animations
-       
-       ribbonLeft.addEventListener('click', triggerCutAnimation);
-       ribbonLeft.addEventListener('touchstart', triggerCutAnimation);
-       ribbonRight.addEventListener('click', triggerCutAnimation);
-       ribbonRight.addEventListener('touchstart', triggerCutAnimation);
-   
+    // Optional: Add event listener to the scissor (if you still want it to work)
+    scissor.addEventListener('click', triggerCutAnimation);
 
     // "No" Button Movement - Moves Smoothly on Hover
     noBtn.addEventListener('click', () => {
@@ -58,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         startHeartAnimation();
     });
 
+    // Heart Animation Function
     function startHeartAnimation() {
         for (let i = 0; i < 50; i++) {
             const heart = document.createElement('div');
