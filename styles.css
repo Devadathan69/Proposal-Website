@@ -1,0 +1,282 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+/* Letter */
+.letter {
+  position: relative;
+  width: 100%;
+  height: auto;
+  background: linear-gradient(145deg, #ffffff, #f9f9f9);
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  aspect-ratio: 5/4;
+  display: flex; /* Use flexbox for vertical centering */
+  flex-direction: column; /* Stack content vertically */
+}
+
+/* Ribbon */
+.ribbon {
+  position: absolute;
+  top: 50%;
+  width: 50%;
+  height: 12px;
+  background-color: #ff6b6b;
+  z-index: 2;
+  transition: transform 1s ease, opacity 0.5s ease;
+  cursor: pointer; /* Make the ribbon a pointer on hover */
+}
+
+.ribbon-left {
+  left: 0;
+  transform-origin: left;
+}
+
+.ribbon-right {
+  right: 0;
+  transform-origin: right;
+}
+
+/* Ribbon Bow */
+.ribbon::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: #ff6b6b;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  pointer-events: none; /* Prevent the ::before from capturing clicks */
+}
+
+/* Ribbon Cutting Animation */
+@keyframes cutRibbonLeft {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(-90deg) translateX(-100%); }
+}
+
+@keyframes cutRibbonRight {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(90deg) translateX(100%); }
+}
+
+.ribbon.cut-left {
+  animation: cutRibbonLeft 1s ease forwards;
+}
+
+.ribbon.cut-right {
+  animation: cutRibbonRight 1s ease forwards;
+}
+
+/* Scissor */
+.scissor {
+  position: absolute;
+  top: 45%;
+  left: -30px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 3;
+  transition: left 1.5s ease;
+}
+
+/* Letter Cover */
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 1;
+  transition: transform 1s ease, opacity 1s ease;
+  transform-origin: top;
+}
+
+/* Letter Content */
+.letter-content {
+  position: relative; /* No longer absolute */
+  top: auto; /* Reset top positioning */
+  left: auto; /* Reset left positioning */
+  width: 100%;
+  height: auto; /* Height adjusts to content */
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items to top */
+  align-items: center;
+  z-index: 2;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
+  overflow-y: auto; /* Add scroll only if needed */
+  flex-grow: 1; /* Allow content to take up available space */
+}
+
+.letter-content.content-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Content Inner Wrapper */
+.content-inner {
+  width: 90%;
+  margin: 20px auto; /* Add top/bottom margins */
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+/* Beautiful Love Text */
+.love-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 32px;
+  font-weight: bold;
+  color: #ff4d6d;
+  text-shadow: 0px 0px 10px rgba(255, 77, 109, 0.8);
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  0% { text-shadow: 0px 0px 10px rgba(255, 77, 109, 0.8); }
+  100% { text-shadow: 0px 0px 20px rgba(255, 77, 109, 1); }
+}
+
+.romantic-text {
+  font-size: 20px;
+  color: #444;
+  font-style: italic;
+  margin: 15px;
+}
+
+/* Buttons */
+.question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 12px 24px; /* Restore original padding */
+  font-size: 18px; /* Restore original font size */
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff6b6b;
+  color: #fff;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: auto; /* Make width adjust to content */
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+button:hover {
+  background-color: #ff4c4c;
+  transform: translateY(-2px);
+}
+
+#no-btn {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none;
+  margin-top: 10px;
+}
+
+/* Falling Hearts Animation */
+.heart {
+  position: absolute;
+  font-size: 2rem;
+  animation: fall 3s linear infinite;
+  color: red;
+}
+
+@keyframes fall {
+  0% {
+      transform: translateY(-10px);
+      opacity: 1;
+  }
+  100% {
+      transform: translateY(100vh);
+      opacity: 0;
+  }
+}
+
+/* Media Queries for Responsiveness */
+@media (min-width: 401px) {
+  .question {
+      flex-direction: row;
+  }
+
+  #no-btn {
+      margin-top: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .content-inner {
+      width: 95%;
+      margin: 10px auto;
+  }
+
+  .love-text {
+      font-size: 18px;
+  }
+
+  .romantic-text {
+      font-size: 12px;
+  }
+
+  button {
+    font-size: 14px; /* Smaller button font size on mobile */
+    padding: 8px 16px; /* Adjust button padding on mobile */
+    width: 100%; /* Make buttons occupy full width on mobile */
+}
+
+  #no-btn {
+      position: relative;
+      top: auto;
+      left: auto;
+      transform: none;
+      margin-top: 10px;
+  }
+
+  .cover, .scissor, .ribbon {
+    display: none;
+}
+.question{
+    display: block; /* Make question visible */
+}
+
+  /* Crucial for initial visibility on mobile */
+  .letter-content {
+      opacity: 1;
+      transform: translateY(0);
+  }
+
+}
