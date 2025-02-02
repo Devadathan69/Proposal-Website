@@ -29,8 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
     scissor.addEventListener('click', triggerCutAnimation);
 
     // Ribbon Click Animations
-    ribbonLeft.addEventListener('click', triggerCutAnimation);
-    ribbonRight.addEventListener('click', triggerCutAnimation);
+       
+       ribbonLeft.addEventListener('click', triggerCutAnimation);
+       ribbonLeft.addEventListener('touchstart', triggerCutAnimation);
+       ribbonRight.addEventListener('click', triggerCutAnimation);
+       ribbonRight.addEventListener('touchstart', triggerCutAnimation);
+   
 
     // "No" Button Movement - Moves Smoothly on Hover
     noBtn.addEventListener('click', () => {
